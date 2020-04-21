@@ -59,6 +59,18 @@ Configurar .eslintrc.json
 * Instalar plugin "EditorConfig for VS Code"
 * Botão direito na pasta do projeto e escolher "Generate .editorconfig"
 
+```
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+end_of_line = lf
+```
+
 * Instalar plugin "ESLint"
 
 
@@ -200,4 +212,61 @@ Criar prettier.config.js
 ### Create React App
 
 * npm i -g create-react-app
-* create-react-app 05-primeiro-projeto-react --template=typescript 
+* create-react-app 05-primeiro-projeto-react --template=typescript
+
+### Padronizar projeto React JS
+
+* Instalar plugin "EditorConfig for VS Code"
+* Botão direito na pasta do projeto e escolher "Generate .editorconfig"
+
+```
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+end_of_line = lf
+```
+
+* $ yarn add eslint -D
+
+* Excluir configuração do package.json
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+
+* yarn eslint --init
+
+```
+? How would you like to use ESLint? To check syntax, find problems, and enforce code style
+? What type of modules does your project use? JavaScript modules (import/export)
+? Which framework does your project use? React
+? Does your project use TypeScript? Yes
+? Where does your code run? Browser
+? How would you like to define a style for your project? Use a popular style guide
+? Which style guide do you want to follow? Airbnb: https://github.com/airbnb/javascript
+? What format do you want your config file to be in? JSON
+? Would you like to install them now with npm? No
+```
+
+* $ yarn add -D eslint-plugin-react@^7.19.0 @typescript-eslint/eslint-plugin@latest eslint-config-airbnb@latest eslint-plugin-import@^2.20.1 eslint-plugin-jsx-a11y@^6.2.3 eslint-plugin-react-hooks@^2.5.0 @typescript-eslint/parser@latest
+
+* criar .eslintgnore
+```
+**/*.js
+node_modules
+build
+```
+
+* editar .eslintrc.json
+
+* $ yarn add -D eslint-import-resolver-typescript
+
+* $ yarn add -D prettier eslint-config-prettier eslint-plugin-prettier
+
+* criar prettier.config.js
+
+
