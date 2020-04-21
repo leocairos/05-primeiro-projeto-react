@@ -209,12 +209,12 @@ Criar prettier.config.js
 * https://jwt.io/ - JWT.IO allows you to decode, verify and generate JWT.
 
 
-### Create React App
+## Create React App
 
 * npm i -g create-react-app
 * create-react-app 05-primeiro-projeto-react --template=typescript
 
-### Padronizar projeto React JS
+## Padronizar projeto React JS
 
 * Instalar plugin "EditorConfig for VS Code"
 * Botão direito na pasta do projeto e escolher "Generate .editorconfig"
