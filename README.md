@@ -1,44 +1,203 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# BootCamp
 
-## Available Scripts
+## Ambiente de desenvolvimento
 
-In the project directory, you can run:
+* Node
+* Yarn
+* Visual Studio Code
+    * Dracula
+    * Material icon Theme
+    * Jira Code Font
 
-### `yarn start`
+```
+const path = require('path')
+path.resolve(__dirname, 'src', 'index.js')
+use o path ao inves de ./src/index.js devivo as diferenças entre SOs
+```
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Criar projeto NodeJs com TypeScript
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```
+$ mkdir pasta-projeto
+$ cd pasta-projeto
+$ yarn init -y
+$ yarn add express
+$ yarn add -D @types/express typescript ts-node-dev eslint-import-resolver-typescript
+$ yarn tsc --init
 
-### `yarn test`
+Configurar tsconfig.json
+    "outDir": "./dist",
+    "rootDir": "./src",
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Configurar script no package.json
+    "scripts": {
+        "build": "tsc",
+        "dev:server":"ts-node-dev --transpileOnly --ignore-watch node-modules src/server.ts"
+    },
 
-### `yarn build`
+Configurar .eslintrc.json
+    "rules": {
+        "import/extensions": [
+        "error",
+        "ignorePackages",
+        {
+            "ts": "never"
+        }
+        ]
+    },
+    "settings": {
+        "import/resolver": {
+        "typescript": {}
+        }
+    }
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Padronizar projeto
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+* Instalar plugin "EditorConfig for VS Code"
+* Botão direito na pasta do projeto e escolher "Generate .editorconfig"
 
-### `yarn eject`
+* Instalar plugin "ESLint"
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+$ yarn add eslint -D
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+$ yarn eslint --init
+    ? How would you like to use ESLint? To check syntax, find problems, and enforce code style
+    ? What type of modules does your project use? JavaScript modules (import/export)
+    ? Which framework does your project use? None of these
+    ? Does your project use TypeScript? Yes
+    ? Where does your code run? Node
+    ? How would you like to define a style for your project? Use a popular style guide
+    ? Which style guide do you want to follow? Airbnb: https://github.com/airbnb/javascript
+    ? What format do you want your config file to be in? JSON
+    ? Would you like to install them now with npm? No
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+$ yarn add -D @typescript-eslint/eslint-plugin@latest eslint-config-airbnb-base@latest eslint-plugin-import@^2.20.1 @typescript-eslint/parser@latest
 
-## Learn More
+* atualizar settings.json
+    "[javascript]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true,
+        }
+    },
+    "[javascriptreact]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true,
+        }
+    },
+    "[typescript]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true,
+        }
+    },
+    "[typescriptreact]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true,
+        }
+    },
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Prettier
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+$ yarn add -D prettier eslint-config-prettier eslint-plugin-prettier
+
+Configurar .eslintrc.json
+    ...
+    "extends": [
+        "airbnb-base",
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint",
+        "plugin:@prettier/recommended"
+    ],
+    ...
+    "plugins": [
+        "@typescript-eslint",
+        "prettier"
+    ],
+    ...
+    "rules": {
+        "prettier/prettier": "error",
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+                "ts": "never"
+            }
+        ]
+    },
+
+Criar prettier.config.js
+	module.exports = {
+		singleQuote: true,
+		trailingComma: "all",
+		arrowParens: "avoid",
+	};
+
+
+### Debug
+
+* Na guia lateral Run (bug) clicar em "create a launch.json file
+
+```
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "protocol": "inspector",
+      "restart": true,
+      "name": "Debug",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/**/*.js"
+      ]
+    }
+  ]
+}
+```
+
+* Atualizar package.json
+
+```
+"dev:server": "ts-node-dev --inspect --transpileOnly --ignore-watch node-modules src/server.ts"
+```
+
+### Lembretes
+
+* Migration
+  * yarn typeorm migration:create -n CreateAppointments
+  * yarn typeorm migration:run
+  * yarn typeorm migration:revert
+
+### Conceitos
+
+* SoC - Separation of Concerns
+* DTO - Data Transfer Object
+* SOLID
+  * Single Responsability Principle
+  * O
+  * L
+  * I
+  * Dependecy Inversion Principle
+* DRY - Don't Repeat Yourself
+* KISS - Keep It Simple & Stupid
+
+### Links
+
+* http://www.md5.cz/ - Online generator md5 hash of a string
+* https://jwt.io/ - JWT.IO allows you to decode, verify and generate JWT.
+
+
+### Create React App
+
+* npm i -g create-react-app
+* create-react-app 05-primeiro-projeto-react --template=typescript 
