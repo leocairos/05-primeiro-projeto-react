@@ -270,3 +270,7 @@ build
 * criar prettier.config.js
 
 
+### Dicas/Lembretes
+
+* //eslint-disable-line
+  desabilita a checagem do eslint na linha
